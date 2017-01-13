@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Recargo Sandbox</string>
+
+    <string name="map">Map</string>
+    <string name="list">List</string>
+    <string name="about">About</string>
+
+    <string name="version_format">Version: %1$s</string>
+</resources>
