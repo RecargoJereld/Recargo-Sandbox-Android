@@ -1,7 +1,5 @@
 package com.recargo.recargosandbox.ui.map;
 
-import com.recargo.recargosandbox.data.api.BaseDataSource;
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -12,20 +10,13 @@ import dagger.Provides;
 @Module
 public class MapPresenterModule {
     private final MapContract.View mapView;
-    private final BaseDataSource plugShareDataSource;
 
-    MapPresenterModule(MapContract.View mapView, BaseDataSource plugShareDataSource) {
+    MapPresenterModule(MapContract.View mapView) {
         this.mapView = mapView;
-        this.plugShareDataSource = plugShareDataSource;
     }
 
     @Provides
     MapContract.View provideMapView() {
         return mapView;
-    }
-
-    @Provides
-    BaseDataSource providePlugShareDataSource() {
-        return plugShareDataSource;
     }
 }

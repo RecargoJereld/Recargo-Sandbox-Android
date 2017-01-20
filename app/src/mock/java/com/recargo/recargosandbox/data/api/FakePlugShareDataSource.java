@@ -26,4 +26,9 @@ public class FakePlugShareDataSource implements BaseDataSource {
 
         callback.onSuccess(response);
     }
+
+    @Override
+    public void addLocation(PSLocation location) {
+        // no-op
+    }
 }

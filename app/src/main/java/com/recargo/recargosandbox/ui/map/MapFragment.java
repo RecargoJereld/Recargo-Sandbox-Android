@@ -62,8 +62,9 @@ public class MapFragment extends Fragment implements MapContract.View {
         ((MainActivity) getActivity()).startLocationUpdates();
 
         DaggerMapComponent.builder()
-                .mapPresenterModule(new MapPresenterModule(this,
-                        RecargoSandboxApp.get(getActivity()).getPlugShareDataSource()))
+                .plugShareRepositoryComponent(RecargoSandboxApp.get(getActivity())
+                                                .getPlugShareRepositoryComponent())
+                .mapPresenterModule(new MapPresenterModule(this))
                 .build()
                 .inject(this);
 

@@ -1,11 +1,11 @@
-package com.recargo.recargosandbox.data.api;
+package com.recargo.recargosandbox.data.api.remote;
 
 import com.google.gson.Gson;
 import com.recargo.recargosandbox.BuildConfig;
 import com.recargo.recargosandbox.data.NetworkModule;
-import com.recargo.recargosandbox.util.ApplicationScope;
 
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -20,13 +20,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module(includes = NetworkModule.class)
 public class PlugShareApiServiceModule {
     @Provides
-    @ApplicationScope
+    @Singleton
     Gson provideGson() {
         return new Gson();
     }
 
     @Provides
-    @ApplicationScope
+    @Singleton
     Retrofit provideRetrofit(Gson gson,
                              @Named("plugshare authenticated client") OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
@@ -37,7 +37,7 @@ public class PlugShareApiServiceModule {
     }
 
     @Provides
-    @ApplicationScope
+    @Singleton
     PlugShareApiService providePlugShareApiService(Retrofit retrofit) {
         return retrofit.create(PlugShareApiService.class);
     }

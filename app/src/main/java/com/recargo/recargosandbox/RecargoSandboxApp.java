@@ -4,9 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.facebook.stetho.Stetho;
-import com.recargo.recargosandbox.data.api.BaseDataSource;
-
-import javax.inject.Inject;
+import com.recargo.recargosandbox.data.api.DaggerPlugShareRepositoryComponent;
+import com.recargo.recargosandbox.data.api.PlugShareRepositoryComponent;
 
 /**
  * Created by jereld on 1/4/17.
@@ -18,8 +17,7 @@ public class RecargoSandboxApp extends Application {
         return (RecargoSandboxApp) activity.getApplication();
     }
 
-    @Inject
-    BaseDataSource plugShareDataSource;
+    PlugShareRepositoryComponent plugShareRepositoryComponent;
 
     @Override
     public void onCreate() {
@@ -29,13 +27,13 @@ public class RecargoSandboxApp extends Application {
             Stetho.initializeWithDefaults(this);
         }
 
-        DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this))
-                .build()
-                .inject(this);
+        plugShareRepositoryComponent =
+                DaggerPlugShareRepositoryComponent.builder()
+                        .applicationModule(new ApplicationModule(this))
+                        .build();
     }
 
-    public BaseDataSource getPlugShareDataSource() {
-        return plugShareDataSource;
+    public PlugShareRepositoryComponent getPlugShareRepositoryComponent() {
+        return plugShareRepositoryComponent;
     }
 }

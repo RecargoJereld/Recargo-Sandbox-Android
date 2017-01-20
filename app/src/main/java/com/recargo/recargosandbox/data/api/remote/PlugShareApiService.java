@@ -1,4 +1,4 @@
-package com.recargo.recargosandbox.data.api;
+package com.recargo.recargosandbox.data.api.remote;
 
 import com.recargo.recargosandbox.data.api.model.PSLocation;
 

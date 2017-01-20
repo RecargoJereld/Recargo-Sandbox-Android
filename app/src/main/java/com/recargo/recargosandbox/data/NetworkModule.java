@@ -2,11 +2,10 @@ package com.recargo.recargosandbox.data;
 
 import android.content.Context;
 
-import com.recargo.recargosandbox.util.ApplicationScope;
-
 import java.io.File;
 
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -18,25 +17,22 @@ import okhttp3.logging.HttpLoggingInterceptor;
 /**
  * Created by jereld on 1/11/17.
  */
-
+@Singleton
 @Module
 public class NetworkModule {
 
     @Provides
-    @ApplicationScope
-    File provideCacheFile(Context context) {
+    File provideCacheFile(@Named("Application Context") Context context) {
         return new File(context.getCacheDir(), "okhttp_cache");
     }
 
     @Provides
-    @ApplicationScope
     Cache provideCache(File cacheFile) {
         int cacheSize = 10 * 1024 * 1024;
 
         return new Cache(cacheFile, cacheSize);
     }
     @Provides
-    @ApplicationScope
     @Named("plugshare authenticated client")
     OkHttpClient provideOkHttpClient(Cache cache) {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();

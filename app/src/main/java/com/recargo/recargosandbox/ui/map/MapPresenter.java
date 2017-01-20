@@ -6,7 +6,7 @@ import android.util.Log;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.recargo.recargosandbox.data.ServiceCallback;
-import com.recargo.recargosandbox.data.api.BaseDataSource;
+import com.recargo.recargosandbox.data.api.PlugShareRepository;
 import com.recargo.recargosandbox.data.api.model.PSLocation;
 
 import java.util.List;
@@ -24,12 +24,12 @@ public final class MapPresenter implements MapContract.Presenter {
     public static final int QUERY_COUNT = 25;
 
     private final MapContract.View mapView;
-    private final BaseDataSource plugShareDataSource;
+    private final PlugShareRepository plugShareRepository;
 
     @Inject
-    public MapPresenter(MapContract.View mapView, BaseDataSource plugShareDataSource) {
+    public MapPresenter(MapContract.View mapView, PlugShareRepository plugShareRepository) {
         this.mapView = mapView;
-        this.plugShareDataSource = plugShareDataSource;
+        this.plugShareRepository = plugShareRepository;
     }
 
     @Override
@@ -44,7 +44,7 @@ public final class MapPresenter implements MapContract.Presenter {
 
     @Override
     public void loadLocationsInRegion(LatLngBounds region) {
-        plugShareDataSource.getLocationsInRegion(region,
+        plugShareRepository.getLocationsInRegion(region,
                         QUERY_COUNT,
                         new ServiceCallback<List<PSLocation>>() {
                             @Override

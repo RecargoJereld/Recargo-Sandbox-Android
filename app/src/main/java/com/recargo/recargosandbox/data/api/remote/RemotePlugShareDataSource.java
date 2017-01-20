@@ -1,7 +1,8 @@
-package com.recargo.recargosandbox.data.api;
+package com.recargo.recargosandbox.data.api.remote;
 
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.recargo.recargosandbox.data.ServiceCallback;
+import com.recargo.recargosandbox.data.api.BaseDataSource;
 import com.recargo.recargosandbox.data.api.model.PSLocation;
 
 import java.util.List;
@@ -14,10 +15,12 @@ import retrofit2.Response;
  * Created by jereld on 1/11/17.
  */
 
-public class PlugShareDataSource implements BaseDataSource {
+public class RemotePlugShareDataSource implements BaseDataSource {
+    private static final String TAG = RemotePlugShareDataSource.class.getSimpleName();
+
     private final PlugShareApiService apiService;
 
-    public PlugShareDataSource(PlugShareApiService apiService) {
+    public RemotePlugShareDataSource(PlugShareApiService apiService) {
         this.apiService = apiService;
     }
 
@@ -51,5 +54,10 @@ public class PlugShareDataSource implements BaseDataSource {
                 callback.onFailure();
             }
         });
+    }
+
+    @Override
+    public void addLocation(PSLocation location) {
+        // TODO: 1/19/17 post location to backend
     }
 }

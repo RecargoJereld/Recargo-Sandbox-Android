@@ -3,7 +3,7 @@ package com.recargo.recargosandbox.map;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.recargo.recargosandbox.data.ServiceCallback;
-import com.recargo.recargosandbox.data.api.BaseDataSource;
+import com.recargo.recargosandbox.data.api.PlugShareRepository;
 import com.recargo.recargosandbox.data.api.model.PSLocation;
 import com.recargo.recargosandbox.ui.map.MapContract;
 import com.recargo.recargosandbox.ui.map.MapPresenter;
@@ -35,7 +35,7 @@ public class MapPresenterTest {
     MapContract.View mapView;
 
     @Mock
-    BaseDataSource plugShareDataSource;
+    PlugShareRepository plugShareRepository;
 
     @Captor
     private ArgumentCaptor<ServiceCallback<List<PSLocation>>> loadLocationsCaptor;
@@ -47,7 +47,7 @@ public class MapPresenterTest {
         MockitoAnnotations.initMocks(this);
 
         setupPSLocations();
-        mapPresenter = new MapPresenter(mapView, plugShareDataSource);
+        mapPresenter = new MapPresenter(mapView, plugShareRepository);
     }
 
     private void setupPSLocations() {
@@ -64,7 +64,7 @@ public class MapPresenterTest {
     public void loadLocationsInRegionAndLoadIntoMap() {
         mapPresenter.loadLocationsInRegion(LAT_LNG_BOUNDS);
 
-        verify(plugShareDataSource).getLocationsInRegion(eq(LAT_LNG_BOUNDS),
+        verify(plugShareRepository).getLocationsInRegion(eq(LAT_LNG_BOUNDS),
                 eq(MapPresenter.QUERY_COUNT),
                 loadLocationsCaptor.capture());
         loadLocationsCaptor.getValue().onSuccess(psLocations);

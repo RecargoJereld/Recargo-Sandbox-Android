@@ -14,4 +14,6 @@ public interface BaseDataSource {
     void getLocationsInRegion(LatLngBounds mapBounds,
                               int count,
                               ServiceCallback<List<PSLocation>> callback);
+
+    void addLocation(PSLocation location);
 }
